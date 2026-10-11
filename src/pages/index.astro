@@ -1,0 +1,52 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import Works from "../components/Works.astro";
+import QuoteBand from "../components/QuoteBand.astro";
+import Why from "../components/Why.astro";
+import Process from "../components/Process.astro";
+import QuoteForm from "../components/QuoteForm.astro";
+import { seo, site } from "../data/site";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  name: site.name,
+  alternateName: site.nameEn,
+  description: seo.home.description,
+  telephone: "+82-10-3052-6704",
+  founder: {
+    "@type": "Person",
+    name: site.representative,
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "양산시",
+    addressRegion: "경상남도",
+    addressCountry: "KR",
+  },
+  areaServed: {
+    "@type": "City",
+    name: "양산시",
+  },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "08:00",
+    closes: "22:00",
+  },
+  taxID: site.businessNumber,
+};
+---
+
+<Base title={seo.home.title} description={seo.home.description} preloadImage={site.image}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+  <Hero />
+  <Works />
+  <QuoteBand />
+  <Why />
+  <Process />
+  <QuoteForm showAside />
+</Base>

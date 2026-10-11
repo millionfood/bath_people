@@ -1,0 +1,105 @@
+---
+import { steps } from "../data/site";
+---
+
+<section class="section process" id="process" aria-labelledby="process-title">
+  <div class="wrap">
+    <h2 id="process-title" class="display">시공과정</h2>
+    <ol class="steps">
+      {
+        steps.map((step, index) => (
+          <li>
+            <span class="step-no">{String(index + 1).padStart(2, "0")}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <div class="statement">
+      <p>상담부터 마무리 점검까지, 바스피플이 꼼꼼하게 진행합니다.</p>
+      <p>
+        중간에 마진을 남기는 인테리어 업체와 달리, 실제 시공팀이라 가능한 일입니다. 견적을 내는 팀과
+        현장에서 시공하는 팀이 같습니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .process {
+    border-top: 1px solid var(--line);
+  }
+
+  .steps {
+    display: grid;
+    gap: 28px;
+    margin-top: clamp(36px, 5vw, 64px);
+  }
+
+  .step-no {
+    display: inline-block;
+    margin-bottom: 12px;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+  }
+
+  .steps h3 {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .steps p {
+    margin-top: 8px;
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .statement {
+    max-width: 920px;
+    margin-top: clamp(48px, 7vw, 84px);
+  }
+
+  .statement p:first-child {
+    font-size: clamp(26px, 3.3vw, 40px);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1.35;
+  }
+
+  .statement p:last-child {
+    max-width: 44em;
+    margin-top: 18px;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  @media (min-width: 900px) {
+    .steps {
+      position: relative;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .steps::before {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--line-strong);
+    }
+
+    .step-no {
+      position: relative;
+      z-index: 1;
+      padding-right: 12px;
+      background: var(--paper);
+    }
+  }
+</style>

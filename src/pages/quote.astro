@@ -1,0 +1,21 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import QuoteForm from "../components/QuoteForm.astro";
+import { seo, site } from "../data/site";
+---
+
+<Base title={seo.quote.title} description={seo.quote.description} solidHeader>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">견적</p>
+      <h1>견적문의</h1>
+      <p class="page-phone">
+        <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a>
+      </p>
+      <p class="lede">
+        매일 {site.hours} · 대표 {site.representative}. 전화로 바로 말씀하시거나, 아래에 시공 범위를 남겨 주세요.
+      </p>
+    </div>
+  </header>
+  <QuoteForm />
+</Base>

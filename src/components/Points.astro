@@ -1,0 +1,90 @@
+---
+import { points } from "../data/site";
+
+interface Props {
+  detailed?: boolean;
+}
+
+const { detailed = false } = Astro.props;
+---
+
+<dl class="points">
+  {
+    points.map((point, index) => (
+      <div class="point">
+        <span class="idx">{String(index + 1).padStart(2, "0")}</span>
+        <dt>{point.title}</dt>
+        <dd>
+          <p>{point.text}</p>
+          {detailed && <p>{point.detail}</p>}
+        </dd>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  .points {
+    margin: 0;
+  }
+
+  .point {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 16px;
+    row-gap: 6px;
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .point:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .idx {
+    grid-column: 1;
+    grid-row: 1;
+    padding-top: 4px;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+  }
+
+  .point dt {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .point dd {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .point dd p + p {
+    margin-top: 6px;
+  }
+
+  @media (min-width: 800px) {
+    .point {
+      grid-template-columns: 48px minmax(180px, 280px) 1fr;
+      align-items: baseline;
+    }
+
+    .point dt {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .point dd {
+      grid-column: 3;
+      grid-row: 1;
+    }
+  }
+</style>

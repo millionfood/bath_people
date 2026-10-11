@@ -1,0 +1,117 @@
+---
+import { site } from "../data/site";
+---
+
+<section class="band" aria-labelledby="band-title">
+  <div class="wrap">
+    <div class="band-head">
+      <h2 id="band-title">견적 상담</h2>
+      <p>매일 {site.hours}</p>
+    </div>
+    <div class="band-grid">
+      <a class="band-link" href={`tel:${site.phoneTel}`}>
+        <span class="band-k">전화</span>
+        <strong>견적문의<span aria-hidden="true">→</span></strong>
+        <span>{site.phoneDisplay}</span>
+      </a>
+      <a class="band-link" href="/quote">
+        <span class="band-k">온라인</span>
+        <strong>온라인 견적<span aria-hidden="true">→</span></strong>
+        <span>시공 범위를 남겨 주세요</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .band {
+    padding: clamp(64px, 8vw, 104px) 0;
+    background: var(--night);
+    color: var(--white);
+  }
+
+  .band-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 12px;
+    color: rgba(246, 243, 236, 0.68);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .band-head h2,
+  .band-head p {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  .band-grid {
+    display: grid;
+  }
+
+  .band-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 28px 0;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .band-link + .band-link {
+    border-top: 1px solid rgba(246, 243, 236, 0.16);
+  }
+
+  .band-k {
+    font-size: 13px;
+    color: rgba(246, 243, 236, 0.62);
+  }
+
+  .band-link strong {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    line-height: 1.1;
+  }
+
+  .band-link strong span {
+    display: inline-block;
+    margin-left: 8px;
+    transition: transform 200ms ease;
+  }
+
+  .band-link:hover strong span {
+    transform: translateX(4px);
+  }
+
+  .band-link > span:last-child {
+    font-size: 16px;
+    font-variant-numeric: tabular-nums;
+    color: rgba(246, 243, 236, 0.78);
+  }
+
+  @media (min-width: 800px) {
+    .band-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .band-link {
+      padding: 28px 40px 8px 0;
+    }
+
+    .band-link + .band-link {
+      border-top: 0;
+      border-left: 1px solid rgba(246, 243, 236, 0.16);
+      padding-left: 48px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .band-link strong span {
+      transition: none;
+    }
+  }
+</style>

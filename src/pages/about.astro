@@ -1,0 +1,71 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import Points from "../components/Points.astro";
+import QuoteBand from "../components/QuoteBand.astro";
+import { seo, site } from "../data/site";
+---
+
+<Base title={seo.about.title} description={seo.about.description} solidHeader>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">소개</p>
+      <h1>바스피플을 만나보세요.</h1>
+      <p class="lede">
+        경남 양산에서 욕실과 타일을 직접 시공하는 팀입니다. 대표 {site.representative}과 시공팀이 상담부터
+        마무리 점검까지 함께합니다.
+      </p>
+    </div>
+  </header>
+  <div class="wrap">
+    <figure class="page-photo">
+      <img src={site.image} alt="" width={site.imageWidth} height={site.imageHeight} />
+    </figure>
+    <div class="about-copy prose">
+      <p>
+        바스피플은 욕실 리모델링, 타일 시공, 타일 하자 보수, 상가 주방 설치, 욕실 누수 및 방수, 그 밖의 설비
+        시공을 합니다. 범위가 애매하면 현장을 보고 말씀드립니다.
+      </p>
+      <p>
+        중간에 공사를 넘기고 마진을 남기는 인테리어 업체와 다릅니다. 실제 시공팀이라, 현장에서 본 상태를 견적과
+        마감에 그대로 반영할 수 있습니다. 상담부터 마무리까지 꼼꼼하게 한 팀이 담당합니다.
+      </p>
+      <p>
+        시공 기록은 10년 넘게 네이버 블로그에 남겨 왔습니다.
+        <a href={site.blogUrl} target="_blank" rel="noopener noreferrer">현장 기록 보기<span class="sr-only"> (새 창)</span></a>
+      </p>
+    </div>
+    <section class="standards" aria-labelledby="standards-title">
+      <h2 id="standards-title" class="display">왜 바스피플일까요?</h2>
+      <Points detailed />
+    </section>
+  </div>
+  <QuoteBand />
+</Base>
+
+<style>
+  .page-photo {
+    margin: clamp(12px, 3vw, 28px) 0 clamp(36px, 5vw, 64px);
+    overflow: hidden;
+    aspect-ratio: 16 / 8;
+    background: #cfc8bb;
+  }
+
+  .page-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .about-copy {
+    margin-bottom: clamp(56px, 8vw, 96px);
+  }
+
+  .standards {
+    padding-bottom: clamp(72px, 10vw, 120px);
+  }
+
+  .standards .display {
+    margin-bottom: clamp(28px, 4vw, 40px);
+  }
+</style>

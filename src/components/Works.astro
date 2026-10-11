@@ -1,0 +1,222 @@
+---
+import { categories, site } from "../data/site";
+
+const first = categories[0];
+---
+
+<section class="section works" id="works" aria-labelledby="works-title">
+  <div class="wrap">
+    <div class="works-head">
+      <p class="kicker">양산 욕실 리모델링, 타일 시공 전문팀 바스피플</p>
+      <h2 id="works-title" class="display">바스피플이 제대로 합니다.</h2>
+    </div>
+    <div class="works-grid" data-works>
+      <div class="works-list">
+        {
+          categories.map((category, index) => (
+            <button
+              type="button"
+              class="cat"
+              data-cat
+              data-images={category.images.join("|")}
+              data-name={category.name}
+              aria-pressed={index === 0}
+            >
+              <span class="cat-top">
+                <span class="idx">{String(index + 1).padStart(2, "0")}</span>
+                <span class="name">{category.name}</span>
+              </span>
+              <span class="desc">{category.summary}</span>
+            </button>
+          ))
+        }
+        <a class="text-link" href={site.blogUrl} target="_blank" rel="noopener noreferrer">
+          시공사례 더보기<span class="sr-only"> (새 창)</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <figure class="works-figure" data-figure aria-label={first.name}>
+        <div class:list={["works-photos", { "is-pair": first.images.length > 1 }]} data-photos>
+          {
+            first.images.map((src) => (
+              <img src={src} alt="" width="768" height="1024" decoding="async" />
+            ))
+          }
+        </div>
+        <figcaption data-caption>{first.name}</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector("[data-works]");
+  if (root instanceof HTMLElement && root.dataset.bound !== "true") {
+    root.dataset.bound = "true";
+    const buttons = [...root.querySelectorAll("[data-cat]")];
+    const figure = root.querySelector("[data-figure]");
+    const photos = root.querySelector("[data-photos]");
+    const caption = root.querySelector("[data-caption]");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (!(button instanceof HTMLButtonElement) || !(figure instanceof HTMLElement) || !(photos instanceof HTMLElement)) return;
+        buttons.forEach((item) => item.setAttribute("aria-pressed", "false"));
+        button.setAttribute("aria-pressed", "true");
+        const name = button.dataset.name ?? "";
+        figure.setAttribute("aria-label", name);
+        if (caption) caption.textContent = name;
+        const sources = (button.dataset.images ?? "").split("|").filter(Boolean);
+        photos.classList.toggle("is-pair", sources.length > 1);
+        const current = [...photos.querySelectorAll("img")].map((img) => img.getAttribute("src"));
+        const same = current.length === sources.length && current.every((src, index) => src === sources[index]);
+        if (!same) {
+          const template = photos.querySelector("img");
+          photos.replaceChildren(
+            ...sources.map((src) => {
+              const img = template instanceof HTMLImageElement ? template.cloneNode() : document.createElement("img");
+              img.src = src;
+              img.alt = "";
+              img.decoding = "async";
+              return img;
+            }),
+          );
+        }
+        if (window.matchMedia("(max-width: 959px)").matches) {
+          figure.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" });
+        }
+      });
+    });
+  }
+</script>
+
+<style>
+  .works-head {
+    max-width: 16em;
+    margin-bottom: clamp(36px, 5vw, 68px);
+  }
+
+  .works-grid {
+    display: grid;
+    gap: 28px;
+  }
+
+  .cat {
+    display: block;
+    width: 100%;
+    padding: 18px 8px 18px 14px;
+    border: 0;
+    border-top: 1px solid var(--line);
+    border-left: 2px solid transparent;
+    background: transparent;
+    text-align: left;
+    color: var(--muted);
+  }
+
+  .cat:last-of-type {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cat[aria-pressed="true"],
+  .cat:hover {
+    color: var(--ink);
+  }
+
+  .cat[aria-pressed="true"] {
+    border-left-color: var(--ink);
+  }
+
+  .cat-top {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+
+  .idx {
+    width: 1.8em;
+    flex: none;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .name {
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .desc {
+    display: block;
+    margin-top: 6px;
+    padding-left: calc(1.8em + 14px);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .works-figure {
+    position: relative;
+    min-height: 460px;
+    margin: 0;
+    overflow: hidden;
+    background: #cfc8bb;
+    scroll-margin-top: calc(var(--header) + 16px);
+  }
+
+  .works-photos {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .works-photos.is-pair {
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .works-photos img {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .works-figure::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 38%;
+    background: linear-gradient(transparent, rgba(12, 12, 10, 0.72));
+    pointer-events: none;
+  }
+
+  .works-figure figcaption {
+    position: absolute;
+    z-index: 1;
+    left: 20px;
+    bottom: 18px;
+    color: var(--white);
+    font-size: 14px;
+  }
+
+  @media (min-width: 960px) {
+    .works-grid {
+      grid-template-columns: minmax(280px, 0.82fr) 1.15fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .works-figure {
+      position: sticky;
+      top: calc(var(--header) + 20px);
+      min-height: min(72vh, 760px);
+    }
+  }
+
+</style>

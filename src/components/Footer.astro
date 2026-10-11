@@ -1,0 +1,114 @@
+---
+import { site } from "../data/site";
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-row">
+      <a class="footer-mark" href="/" aria-label="바스피플 홈">
+        <img
+          src={site.image}
+          alt=""
+          width={site.imageWidth}
+          height={site.imageHeight}
+        />
+      </a>
+      <span>바스피플</span>
+      <span>대표 {site.representative}</span>
+      <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a>
+    </div>
+    <div class="footer-row footer-sub">
+      <span>사업자 등록번호 {site.businessNumber}</span>
+      <span>{site.hours}</span>
+    </div>
+    <nav class="footer-nav" aria-label="하단">
+      <a href="/about">소개</a>
+      <a href="/quote">견적문의</a>
+      <a href={site.blogUrl} target="_blank" rel="noopener noreferrer">
+        시공사례<span class="sr-only"> (새 창)</span>
+      </a>
+    </nav>
+    <p class="footer-en">{site.nameEn}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding: clamp(48px, 7vw, 80px) 0;
+    background: var(--night);
+    color: var(--white);
+  }
+
+  .footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 0;
+    font-size: 15px;
+  }
+
+  .footer-row > * + *::before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 12px;
+    margin: 0 14px;
+    background: rgba(246, 243, 236, 0.35);
+    vertical-align: -1px;
+  }
+
+  .footer-sub {
+    margin-top: 14px;
+    color: rgba(246, 243, 236, 0.72);
+    font-size: 14px;
+  }
+
+  .footer-row a {
+    font-variant-numeric: tabular-nums;
+    text-decoration: none;
+  }
+
+  .footer-row a:hover,
+  .footer-nav a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .footer-mark {
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    flex: none;
+  }
+
+  .footer-mark::before {
+    display: none;
+  }
+
+  .footer-mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    margin-top: 36px;
+    font-size: 14px;
+  }
+
+  .footer-nav a {
+    text-decoration: none;
+    color: rgba(246, 243, 236, 0.78);
+  }
+
+  .footer-en {
+    margin-top: 28px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: rgba(246, 243, 236, 0.45);
+  }
+</style>

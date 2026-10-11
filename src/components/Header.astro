@@ -1,0 +1,293 @@
+---
+import { nav, site } from "../data/site";
+
+interface Props {
+  solid?: boolean;
+}
+
+const { solid = false } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+function isCurrent(href: string) {
+  if (href.includes("#")) return false;
+  return (href.replace(/\/$/, "") || "/") === path;
+}
+---
+
+<header class:list={["site-header", { "is-solid": solid }]} data-header>
+  <div class="header-bar">
+    <a class="logo" href="/">바스피플</a>
+    <div class="header-end">
+      <nav id="site-nav" class="nav-panel" data-panel aria-label="주요">
+        {
+          nav.map((item) => (
+            <a href={item.href} aria-current={isCurrent(item.href) ? "page" : undefined}>
+              {item.label}
+            </a>
+          ))
+        }
+        <a class="panel-phone" href={`tel:${site.phoneTel}`}>
+          전화 {site.phoneDisplay}
+        </a>
+      </nav>
+      <a class="header-phone" href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a>
+      <button
+        class="menu-toggle"
+        type="button"
+        data-menu
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        <span class="sr-only">메뉴 열기</span>
+        <span class="menu-bars" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector("[data-header]");
+  if (header instanceof HTMLElement && header.dataset.bound !== "true") {
+    header.dataset.bound = "true";
+    const toggle = header.querySelector("[data-menu]");
+    const panel = header.querySelector("[data-panel]");
+    const label = toggle?.querySelector(".sr-only");
+    const main = document.getElementById("content");
+    const footer = document.querySelector(".site-footer");
+
+    const setOpen = (open, focus = true) => {
+      header.classList.toggle("is-open", open);
+      document.body.classList.toggle("nav-open", open);
+      if (toggle instanceof HTMLButtonElement) {
+        toggle.setAttribute("aria-expanded", String(open));
+      }
+      if (label) label.textContent = open ? "메뉴 닫기" : "메뉴 열기";
+      if (main) main.inert = open;
+      if (footer instanceof HTMLElement) footer.inert = open;
+      if (!focus) return;
+      if (open) {
+        const first = panel?.querySelector("a");
+        if (first instanceof HTMLElement) first.focus();
+      } else if (toggle instanceof HTMLElement) {
+        toggle.focus();
+      }
+    };
+
+    toggle?.addEventListener("click", () => {
+      setOpen(!header.classList.contains("is-open"));
+    });
+
+    panel?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setOpen(false, false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && header.classList.contains("is-open")) {
+        setOpen(false);
+      }
+    });
+
+    const onScroll = () => {
+      header.classList.toggle("is-scrolled", window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const desktop = window.matchMedia("(min-width: 960px)");
+    desktop.addEventListener("change", (event) => {
+      if (event.matches) setOpen(false, false);
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 40;
+    color: var(--white);
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background 200ms ease, border-color 200ms ease;
+  }
+
+  .site-header.is-solid,
+  .site-header.is-scrolled,
+  .site-header.is-open {
+    background: rgba(16, 17, 15, 0.96);
+    border-bottom-color: rgba(246, 243, 236, 0.1);
+  }
+
+  .header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header);
+    padding: 0 20px;
+    gap: 20px;
+  }
+
+  @media (min-width: 900px) {
+    .header-bar {
+      padding-inline: 48px;
+    }
+  }
+
+  .logo {
+    position: relative;
+    z-index: 2;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    text-decoration: none;
+  }
+
+  .header-end {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-panel {
+    display: none;
+  }
+
+  .site-header.is-open .nav-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: calc(var(--header) + 12px) 24px 40px;
+    background: var(--night);
+  }
+
+  .nav-panel a {
+    text-decoration: none;
+  }
+
+  .site-header.is-open .nav-panel a {
+    font-size: clamp(32px, 8vw, 48px);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    line-height: 1.25;
+  }
+
+  .panel-phone {
+    margin-top: 28px;
+    font-size: 18px !important;
+    letter-spacing: 0 !important;
+    font-variant-numeric: tabular-nums;
+    color: rgba(246, 243, 236, 0.72);
+  }
+
+  .header-phone {
+    display: none;
+  }
+
+  .menu-toggle {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin-left: 4px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+  }
+
+  .menu-bars,
+  .menu-bars::before,
+  .menu-bars::after {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: currentColor;
+    position: relative;
+  }
+
+  .menu-bars::before,
+  .menu-bars::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .menu-bars::before {
+    top: -6px;
+  }
+
+  .menu-bars::after {
+    top: 6px;
+  }
+
+  .is-open .menu-bars {
+    background: transparent;
+  }
+
+  .is-open .menu-bars::before,
+  .is-open .menu-bars::after {
+    top: 0;
+  }
+
+  .is-open .menu-bars::before {
+    transform: rotate(45deg);
+  }
+
+  .is-open .menu-bars::after {
+    transform: rotate(-45deg);
+  }
+
+  @media (min-width: 960px) {
+    .menu-toggle {
+      display: none;
+    }
+
+    .nav-panel {
+      position: static;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 28px;
+      padding: 0;
+      background: transparent;
+    }
+
+    .site-header.is-open .nav-panel {
+      position: static;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      padding: 0;
+      background: transparent;
+    }
+
+    .nav-panel a,
+    .site-header.is-open .nav-panel a {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.4;
+    }
+
+    .nav-panel a[aria-current="page"] {
+      text-decoration: underline;
+      text-underline-offset: 6px;
+    }
+
+    .panel-phone {
+      display: none;
+    }
+
+    .header-phone {
+      display: inline-flex;
+      margin-left: 32px;
+      font-size: 14px;
+      font-variant-numeric: tabular-nums;
+      text-decoration: none;
+    }
+  }
+</style>

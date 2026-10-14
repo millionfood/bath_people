@@ -8,7 +8,10 @@ const first = categories[0];
   <div class="wrap">
     <div class="works-head">
       <p class="kicker">양산 욕실 리모델링, 타일 시공 전문팀 바스피플</p>
-      <h2 id="works-title" class="display">바스피플이 제대로 합니다.</h2>
+      <h2 id="works-title" class="display">
+        <span>바스피플이</span>
+        <span>제대로 합니다.</span>
+      </h2>
     </div>
     <div class="works-grid" data-works>
       <div class="works-list">
@@ -93,8 +96,16 @@ const first = categories[0];
 
 <style>
   .works-head {
-    max-width: 16em;
     margin-bottom: clamp(36px, 5vw, 68px);
+  }
+
+  .works-head .display {
+    width: max-content;
+    max-width: 100%;
+  }
+
+  .works-head .display span {
+    display: block;
   }
 
   .works-grid {

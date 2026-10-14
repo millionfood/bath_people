@@ -41,23 +41,23 @@ export const nav = [
 
 export const slides = [
   {
-    eyebrow: "양산 · 욕실 리모델링",
-    title: ["양산의 욕실을", "제대로 고칩니다."],
-    image: "/images/hero-1.jpg",
+    eyebrow: "양산 욕실 리모델링 · 타일 시공 전문팀 바스피플",
+    title: ["타일과 욕실을", "가장 잘 아는 사람들"],
+    image: "/images/hero-1.png",
     width: 1024,
     height: 576,
   },
   {
-    eyebrow: "타일 시공",
-    title: ["벽과 바닥을", "현장에서 맞춥니다."],
-    image: "/images/hero-2.jpg",
+    eyebrow: "양산 욕실 리모델링 · 타일 시공 전문팀 바스피플",
+    title: ["합리적인 견적", "확실한 시공"],
+    image: "/images/hero-2.png",
     width: 1024,
     height: 576,
   },
   {
-    eyebrow: "직접 시공팀",
-    title: ["상담부터 끝까지", "직접 합니다."],
-    image: "/images/hero-3.jpg",
+    eyebrow: "양산 욕실 리모델링 · 타일 시공 전문팀 바스피플",
+    title: ["경험이 기술이 되고", "기술이 완성도를 만듭니다"],
+    image: "/images/hero-3.png",
     width: 1024,
     height: 576,
   },
@@ -66,17 +66,19 @@ export const slides = [
 export const categories = [
   {
     name: "욕실 리모델링",
-    summary: "철거부터 타일, 위생도기, 마감까지 욕실 전체를 다시 잡습니다.",
+    summary:
+      "고객의 예산과 공간, 원하는 디자인에 맞춰 욕실 리모델링을 진행합니다.",
     images: ["/images/bathroom-remodel.jpg"],
   },
   {
     name: "타일 시공",
-    summary: "바닥과 벽, 줄눈과 단차를 현장에서 맞춰 시공합니다.",
+    summary:
+      "아파트·주택·상가·공장 등 다양한 공간의 벽, 바닥 타일 시공을 진행합니다.",
     images: ["/images/tile-work.jpg"],
   },
   {
     name: "타일 하자 보수",
-    summary: "들뜸, 균열, 파손처럼 문제가 된 구간을 확인하고 보수합니다.",
+    summary: "들뜸, 균열, 파손 등 문제가 된 타일을 현장 상태에 맞게 보수합니다.",
     images: ["/images/tile-repair-1.jpg", "/images/tile-repair-2.jpg"],
   },
   {
@@ -86,48 +88,67 @@ export const categories = [
   },
   {
     name: "욕실 누수 및 방수",
-    summary: "누수 원인을 확인한 뒤 방수와 마감까지 이어서 시공합니다.",
+    summary:
+      "누수 진단과 방수 공사부터 타일 마감, 필요 시 아랫집 피해 복구까지 진행합니다.",
     images: ["/images/waterproof.jpg"],
   },
   {
     name: "기타 설비 시공",
-    summary: "욕실과 연결된 설비 공사는 상담 후 범위를 정해 진행합니다.",
+    summary:
+      "세면기·변기·수전 등 욕실 설비와 상가·주택의 간단한 조적·미장 작업도 진행합니다.",
     images: ["/images/facility.jpg"],
+  },
+] as const;
+
+export const certificates = [
+  {
+    name: "조적기능사",
+    image: "/images/cert-masonry.jpg",
+    width: 1024,
+    height: 761,
+    alt: "김명관 조적기능사 국가기술자격증. 2014년 6월 발급.",
+  },
+  {
+    name: "타일기능사",
+    image: "/images/cert-tile.jpg",
+    width: 1024,
+    height: 758,
+    alt: "김명관 타일기능사 국가기술자격증. 2014년 6월 발급.",
   },
 ] as const;
 
 export const points = [
   {
     title: "국가 자격증 보유",
-    text: "국가자격을 갖춘 시공팀이 작업합니다.",
-    detail:
-      "욕실처럼 물과 마감이 만나는 공간은 자격과 현장 감각이 함께 필요합니다.",
+    text: "타일기능사·조적기능사 등 국가자격을 갖춘 시공팀이 작업합니다.",
+    detail: "국가기술자격을 바탕으로 기본과 원칙에 충실하게 시공합니다.",
   },
   {
     title: "20+ 현장 경험",
-    text: "현장에서 쌓아 온 시공 경험으로 범위를 판단합니다.",
+    text: "다양한 현장에서 오랜 기간 경험을 쌓아 왔습니다.",
     detail:
-      "바닥 상태, 기존 타일, 배관 위치를 보고 집에 맞는 시공 범위를 정합니다.",
+      "현장 상태에 맞는 시공 방법과 적합한 자재, 합리적인 견적을 제안합니다.",
   },
   {
     title: "10년+ 블로그 운영",
-    text: "시공 기록을 10년 넘게 블로그에 남겨 왔습니다.",
-    detail: "말로만 설명하지 않고, 현장에 남겨 둔 글을 함께 보실 수 있습니다.",
+    text: "실제 시공 기록을 10년 넘게 블로그에 남겨 왔습니다.",
+    detail: "실제 시공 과정과 결과를 사진으로 직접 확인하실 수 있습니다.",
   },
   {
     title: "공공기관 시공 경험 多",
-    text: "공공기관 현장도 다수 시공했습니다.",
-    detail: "주택과 상가 외에 일정과 기준이 분명한 현장도 진행해 왔습니다.",
+    text: "높은 기준과 꼼꼼함이 요구되는 현장을 다수 시공했습니다.",
+    detail:
+      "가정집과 상가뿐 아니라 높은 기준과 일정관리가 필요한 현장에서도 믿고 맡기는 시공팀입니다.",
   },
   {
     title: "금연 시공",
-    text: "시공자 전원이 금연입니다.",
-    detail: "공사가 끝난 집에 담배 냄새를 남기지 않습니다.",
+    text: "시공팀 전원 금연 시공으로 담배 냄새 없이 깔끔하고 쾌적하게 작업합니다.",
+    detail: "시공 중은 물론 휴식 시간에도 현장에서 담배를 피우지 않습니다.",
   },
   {
     title: "A/S 1년",
-    text: "시공 후 1년 동안 A/S를 진행합니다.",
-    detail: "마무리 점검에서 끝내지 않고, 이후 문제까지 이어 받습니다.",
+    text: "시공이 끝난 뒤에도 1년간 책임감 있게 관리합니다.",
+    detail: "마무리 점검에서 끝내지 않고, 이후에 생기는 문제까지 책임집니다.",
   },
 ] as const;
 

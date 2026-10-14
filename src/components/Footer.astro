@@ -6,12 +6,7 @@ import { site } from "../data/site";
   <div class="wrap">
     <div class="footer-row">
       <a class="footer-mark" href="/" aria-label="바스피플 홈">
-        <img
-          src={site.image}
-          alt=""
-          width={site.imageWidth}
-          height={site.imageHeight}
-        />
+        <img src="/images/logo.png" alt="" width="1024" height="1024" />
       </a>
       <span>바스피플</span>
       <span>대표 {site.representative}</span>
@@ -75,8 +70,8 @@ import { site } from "../data/site";
   }
 
   .footer-mark {
-    width: 42px;
-    height: 42px;
+    width: 132px;
+    height: 132px;
     overflow: hidden;
     flex: none;
   }
@@ -90,6 +85,7 @@ import { site } from "../data/site";
     height: 100%;
     object-fit: cover;
     object-position: center center;
+    mix-blend-mode: lighten;
   }
 
   .footer-nav {

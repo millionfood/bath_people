@@ -1,6 +1,8 @@
 export const site = {
   name: "바스피플",
   nameEn: "Bath People",
+  /** 배포 도메인 (예: https://example.com). canonical·og·sitemap·JSON-LD에 사용 */
+  url: "https://www.xn--9g3b23j59qqfa.com/",
   representative: "김명관",
   phoneDisplay: "010-3052-6704",
   phoneTel: "010-3052-6704",
@@ -8,27 +10,27 @@ export const site = {
   businessNumber: "591-28-01722",
   hours: "08:00–22:00",
   area: "경남 양산",
-  image: "/images/placeholder.jpg",
+  image: "/images/hero-1.png",
   imageWidth: 1024,
-  imageHeight: 691,
+  imageHeight: 576,
   blogUrl: "https://blog.naver.com/qktmvlvmf12",
 } as const;
 
 export const seo = {
   home: {
-    title: "바스피플 | 양산 욕실 리모델링 · 타일 시공",
+    title: "양산 타일 시공 · 욕실 리모델링 | 바스피플",
     description:
-      "양산 욕실 리모델링, 타일 시공, 하자 보수, 누수·방수를 직접 시공합니다. 상담부터 마무리 점검까지 바스피플. 대표 김명관 010-3052-6704.",
+      "양산 타일 시공, 욕실 리모델링, 하자 보수, 누수·방수를 직접 시공합니다. 상담부터 마무리 점검까지 바스피플. 대표 김명관 010-3052-6704.",
   },
   about: {
-    title: "바스피플 소개 | 양산 욕실·타일 시공팀",
+    title: "양산 타일·욕실 시공팀 소개 | 바스피플",
     description:
-      "바스피플은 경남 양산의 욕실·타일 시공팀입니다. 국가 자격증, 현장 경험, 10년 넘는 블로그, 공공기관 시공, 금연 시공, A/S 1년. 대표 김명관.",
+      "바스피플은 경남 양산의 타일·욕실 시공팀입니다. 국가 자격증, 현장 경험, 10년 넘는 블로그, 공공기관 시공, 금연 시공, A/S 1년. 대표 김명관.",
   },
   quote: {
-    title: "견적문의 | 바스피플",
+    title: "양산 타일 견적문의 | 바스피플",
     description:
-      "바스피플 견적문의. 전화 010-3052-6704, 매일 08:00–22:00. 욕실 리모델링과 타일 시공 범위를 남기면 직접 시공팀이 안내합니다.",
+      "양산 타일·욕실 시공 견적문의. 전화 010-3052-6704, 매일 08:00–22:00. 시공 범위를 남기면 바스피플 직접 시공팀이 안내합니다.",
   },
 } as const;
 
@@ -42,7 +44,7 @@ export const nav = [
 export const slides = [
   {
     eyebrow: "양산 욕실 리모델링 · 타일 시공 전문팀 바스피플",
-    title: ["타일과 욕실을", "가장 잘 아는 사람들"],
+    title: ["양산 타일 시공", "욕실 리모델링"],
     image: "/images/hero-1.png",
     width: 1024,
     height: 576,
@@ -68,35 +70,36 @@ export const categories = [
     name: "욕실 리모델링",
     summary:
       "고객의 예산과 공간, 원하는 디자인에 맞춰 욕실 리모델링을 진행합니다.",
-    images: ["/images/bathroom-remodel.jpg"],
+    images: ["/images/hero-1.png"],
   },
   {
     name: "타일 시공",
     summary:
       "아파트·주택·상가·공장 등 다양한 공간의 벽, 바닥 타일 시공을 진행합니다.",
-    images: ["/images/tile-work.jpg"],
+    images: ["/images/hero-2.png"],
   },
   {
     name: "타일 하자 보수",
-    summary: "들뜸, 균열, 파손 등 문제가 된 타일을 현장 상태에 맞게 보수합니다.",
-    images: ["/images/tile-repair-1.jpg", "/images/tile-repair-2.jpg"],
+    summary:
+      "들뜸, 균열, 파손 등 문제가 된 타일을 현장 상태에 맞게 보수합니다.",
+    images: ["/images/hero-2.png", "/images/hero-3.png"],
   },
   {
     name: "상가 주방 설치",
     summary: "상가 주방의 타일과 설비 시공을 현장 조건에 맞춰 진행합니다.",
-    images: ["/images/commercial-kitchen.jpg"],
+    images: ["/images/hero-3.png"],
   },
   {
     name: "욕실 누수 및 방수",
     summary:
       "누수 진단과 방수 공사부터 타일 마감, 필요 시 아랫집 피해 복구까지 진행합니다.",
-    images: ["/images/waterproof.jpg"],
+    images: ["/images/hero-1.png"],
   },
   {
     name: "기타 설비 시공",
     summary:
       "세면기·변기·수전 등 욕실 설비와 상가·주택의 간단한 조적·미장 작업도 진행합니다.",
-    images: ["/images/facility.jpg"],
+    images: ["/images/hero-2.png"],
   },
 ] as const;
 

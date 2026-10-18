@@ -8,6 +8,7 @@ import Process from "../components/Process.astro";
 import QuoteForm from "../components/QuoteForm.astro";
 import { seo, site } from "../data/site";
 
+const origin = site.url.replace(/\/$/, "");
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
@@ -15,6 +16,9 @@ const jsonLd = {
   alternateName: site.nameEn,
   description: seo.home.description,
   telephone: "+82-10-3052-6704",
+  ...(origin ? { url: origin } : {}),
+  image: origin ? new URL(site.image, origin).href : site.image,
+  sameAs: [site.blogUrl],
   founder: {
     "@type": "Person",
     name: site.representative,
